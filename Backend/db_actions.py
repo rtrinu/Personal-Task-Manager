@@ -36,6 +36,7 @@ def init_task_table():
             description TEXT,
             due_date TIMESTAMP,
             PRIORITY INT DEFAULT 0,
+            completed BOOLEAN DEFAULT FALSE,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
         );

@@ -38,7 +38,9 @@ def dashboard():
     fullname = db_actions.get_fullname_by_id(user_id)
     email = db_actions.get_email_by_id(user_id)
     joined_at = db_actions.get_joined_at_date_by_id(user_id)
-    return render_template('dashboard.html', fullname=fullname, email=email, joined_at=joined_at)
+    user_tasks = display_tasks()
+    displayed_tasks = user_tasks[:3]
+    return render_template('dashboard.html', fullname=fullname, email=email, joined_at=joined_at, tasks=displayed_tasks )
 
 @app.route('/create-task', methods=['GET','POST'])
 def create_task():
@@ -60,13 +62,29 @@ def create_task():
         task = db_actions.create_task(user_id, title, description, due_date, priority)
         if task:
             print("TASK CREATED:", task)
-            flash("Task created successfully!", "success")
             return redirect(url_for('dashboard'))
         else:
-            flash("Failed to create task.", "danger")
             print("TASK CREATION FAILED")
     return render_template('create-task.html')
 
+def display_tasks():
+    user = session.get('user_id')
+    if not user:
+        return []
+    tasks = db_actions.get_tasks_by_user(user)
+    keys_to_remove = ['id', 'user_id']
+    for task in tasks:
+        for key in keys_to_remove:
+            task.pop(key, None)
+    return tasks
+
+
+@app.route('/all-tasks')
+def all_tasks():
+    if 'user_id' not in session:
+        return redirect(url_for('auth_routes.login_form'))
+    tasks = display_tasks()
+    return render_template('all-tasks.html', tasks=tasks)
 
 
 @app.route('/logout')

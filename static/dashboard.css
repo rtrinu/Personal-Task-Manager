@@ -366,3 +366,46 @@ body {
     text-align: center;
   }
 }
+
+.task-priority {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  margin-left: 0.5rem;
+  color: white;
+}
+
+.task-priority.low {
+  background-color: #38a169; /* green */
+}
+
+.task-priority.medium {
+  background-color: #dd6b20; /* orange */
+}
+
+.task-priority.high {
+  background-color: #c53030; /* red */
+}
+
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.task-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.task-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+}

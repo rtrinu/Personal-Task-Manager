@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Tasks - TaskFlow</title>
+    <link rel="stylesheet" href="/static/all-tasks.css">
+</head>
+<body>
+    <div class="tasks-container">
+        <!-- Header -->
+        <header class="tasks-header">
+            <div class="header-content">
+                <h1>TaskFlow</h1>
+                <div class="user-menu">
+                    <span class="user-name">John Doe</span>
+                    <button class="logout-btn">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="tasks-main">
+            <div class="page-header">
+                <h2>All Tasks</h2>
+                <p>Manage and track all your tasks in one place</p>
+                <div class="header-actions">
+                    <a href="/create-task" class="create-task-btn">+ Create New Task</a>
+                    <a href="/dashboard" class="back-to-dashboard">← Back to Dashboard</a>
+                </div>
+            </div>
+
+            <!-- Filter Section -->
+            <div class="filter-section">
+                <div class="filter-card">
+                    <div class="filter-controls">
+                        <select class="filter-select" id="statusFilter">
+                            <option value="all">All Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="in-progress">In Progress</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                        <select class="filter-select" id="priorityFilter">
+                            <option value="all">All Priority</option>
+                            <option value="high">High Priority</option>
+                            <option value="medium">Medium Priority</option>
+                            <option value="low">Low Priority</option>
+                        </select>
+                        <input type="text" class="search-input" placeholder="Search tasks..." id="searchInput">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tasks List -->
+            <div class="tasks-list">
+                <!-- Task Item 1 -->
+                <div class="task-card">
+                    <div class="task-header">
+                        <h3 class="task-title">Complete project proposal</h3>
+                        <div class="task-badges">
+                            <span class="task-status pending">Pending</span>
+                            <span class="task-priority high">High</span>
+                        </div>
+                    </div>
+                    <p class="task-description">Finalize the project proposal document and submit it to the client for review.</p>
+                    <div class="task-footer">
+                        <div class="task-meta">
+                            <span class="task-date">📅 Due: Dec 15, 2024</span>
+                            <span class="task-created">Created: Dec 10, 2024</span>
+                        </div>
+                        <div class="task-actions">
+                            <button class="action-btn edit">Edit</button>
+                            <button class="action-btn delete">Delete</button>
+                            <button class="action-btn complete">Mark Complete</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task Item 2 -->
+                <div class="task-card">
+                    <div class="task-header">
+                        <h3 class="task-title">Review team performance</h3>
+                        <div class="task-badges">
+                            <span class="task-status in-progress">In Progress</span>
+                            <span class="task-priority medium">Medium</span>
+                        </div>
+                    </div>
+                    <p class="task-description">Conduct quarterly performance reviews for all team members and provide feedback.</p>
+                    <div class="task-footer">
+                        <div class="task-meta">
+                            <span class="task-date">📅 Due: Dec 20, 2024</span>
+                            <span class="task-created">Created: Dec 8, 2024</span>
+                        </div>
+                        <div class="task-actions">
+                            <button class="action-btn edit">Edit</button>
+                            <button class="action-btn delete">Delete</button>
+                            <button class="action-btn complete">Mark Complete</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task Item 3 -->
+                <div class="task-card">
+                    <div class="task-header">
+                        <h3 class="task-title">Update website content</h3>
+                        <div class="task-badges">
+                            <span class="task-status completed">Completed</span>
+                            <span class="task-priority low">Low</span>
+                        </div>
+                    </div>
+                    <p class="task-description">Update the company website with new product information and testimonials.</p>
+                    <div class="task-footer">
+                        <div class="task-meta">
+                            <span class="task-date">📅 Due: Dec 12, 2024</span>
+                            <span class="task-created">Created: Dec 5, 2024</span>
+                        </div>
+                        <div class="task-actions">
+                            <button class="action-btn edit">Edit</button>
+                            <button class="action-btn delete">Delete</button>
+                            <button class="action-btn complete" disabled>Completed</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task Item 4 -->
+                <div class="task-card">
+                    <div class="task-header">
+                        <h3 class="task-title">Prepare monthly report</h3>
+                        <div class="task-badges">
+                            <span class="task-status pending">Pending</span>
+                            <span class="task-priority medium">Medium</span>
+                        </div>
+                    </div>
+                    <p class="task-description">Compile and analyze monthly sales data and create comprehensive report for management.</p>
+                    <div class="task-footer">
+                        <div class="task-meta">
+                            <span class="task-date">📅 Due: Dec 25, 2024</span>
+                            <span class="task-created">Created: Dec 11, 2024</span>
+                        </div>
+                        <div class="task-actions">
+                            <button class="action-btn edit">Edit</button>
+                            <button class="action-btn delete">Delete</button>
+                            <button class="action-btn complete">Mark Complete</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task Item 5 -->
+                <div class="task-card">
+                    <div class="task-header">
+                        <h3 class="task-title">Client meeting preparation</h3>
+                        <div class="task-badges">
+                            <span class="task-status in-progress">In Progress</span>
+                            <span class="task-priority high">High</span>
+                        </div>
+                    </div>
+                    <p class="task-description">Prepare presentation materials and agenda for upcoming client meeting next week.</p>
+                    <div class="task-footer">
+                        <div class="task-meta">
+                            <span class="task-date">📅 Due: Dec 18, 2024</span>
+                            <span class="task-created">Created: Dec 9, 2024</span>
+                        </div>
+                        <div class="task-actions">
+                            <button class="action-btn edit">Edit</button>
+                            <button class="action-btn delete">Delete</button>
+                            <button class="action-btn complete">Mark Complete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty State (hidden by default) -->
+            <div class="empty-state" style="display: none;">
+                <div class="empty-card">
+                    <div class="empty-icon">📝</div>
+                    <h3>No tasks found</h3>
+                    <p>You don't have any tasks yet. Create your first task to get started!</p>
+                    <a href="/create-task" class="create-first-task-btn">Create Your First Task</a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Simple filter functionality
+        document.getElementById('statusFilter').addEventListener('change', filterTasks);
+        document.getElementById('priorityFilter').addEventListener('change', filterTasks);
+        document.getElementById('searchInput').addEventListener('input', filterTasks);
+
+        function filterTasks() {
+            const statusFilter = document.getElementById('statusFilter').value;
+            const priorityFilter = document.getElementById('priorityFilter').value;
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const taskCards = document.querySelectorAll('.task-card');
+
+            taskCards.forEach(card => {
+                const status = card.querySelector('.task-status').textContent.toLowerCase().replace(' ', '-');
+                const priority = card.querySelector('.task-priority').textContent.toLowerCase();
+                const title = card.querySelector('.task-title').textContent.toLowerCase();
+                const description = card.querySelector('.task-description').textContent.toLowerCase();
+
+                const statusMatch = statusFilter === 'all' || status === statusFilter;
+                const priorityMatch = priorityFilter === 'all' || priority === priorityFilter;
+                const searchMatch = searchTerm === '' || title.includes(searchTerm) || description.includes(searchTerm);
+
+                if (statusMatch && priorityMatch && searchMatch) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
