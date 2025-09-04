@@ -78,10 +78,6 @@ def create_task():
             print("TASK CREATION FAILED")
     return render_template('create-task.html', fullname= fullname)
 
-from datetime import datetime
-from flask import session
-import Backend.db_actions as db_actions
-
 def display_tasks():
     user = session.get('user_id')
     if not user:
@@ -107,13 +103,10 @@ def mark_overdue_task(task):
         task['overdue'] = False
     return task
 
-
 def overdue_tasks(tasks):
     for task in tasks:
         mark_overdue_task(task)
     return tasks
-
-
 
 @app.route('/all-tasks')
 def all_tasks():
@@ -135,6 +128,43 @@ def delete_task(task_id):
     else:
         print("Task Failed to delete")
     return redirect(url_for('all_tasks'))
+
+@app.route('/edit-task/<int:task_id>', methods=['GET','POST'])
+def edit_task(task_id):
+    if 'user_id' not in session:
+        return redirect(url_for('auth_routes.login_form'))
+
+    user_id = session['user_id']
+
+    if request.method == 'POST':
+        title = request.form.get('title')
+        if not title:
+            print("Title cannot be empty")
+            return redirect(url_for('edit_task', task_id = task_id))
+        description = request.form.get('description')
+        due_date = request.form.get('due_date')
+        priority = request.form.get('priority')
+
+        success = db_actions.edit_task(task_id, user_id, title, description, due_date, priority)
+        if success:
+            print("Successfully edited")
+        else:
+            print("edit failed")
+        return redirect(url_for('all_tasks'))
+
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM user_tasks WHERE id = %s AND user_id = %s", (task_id, user_id))
+    task = cur.fetchone()
+    cur.close()
+    conn.close()
+
+    if not task:
+        flash("Task not found.", "danger")
+        return redirect(url_for('all_tasks'))
+
+    return render_template('edit-task.html', task=task)
+
 
 @app.route('/logout')
 def logout():

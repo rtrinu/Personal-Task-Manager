@@ -1,0 +1,94 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 500px;
+}
+
+/* Updated class name for edit task card */
+.edit-task-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  text-align: center;
+}
+
+/* Updated class name for edit task form */
+.edit-task-form {
+  text-align: left;
+}
+
+/* Updated button styling for update task */
+.update-task-btn {
+  width: 100%;
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-bottom: 12px;
+}
+
+.update-task-btn:hover {
+  background: #5a67d8;
+}
+
+.update-task-btn:active {
+  transform: translateY(1px);
+}
+
+/* Added cancel button styling */
+.cancel-btn {
+  width: 100%;
+  background: #e2e8f0;
+  color: #4a5568;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-bottom: 20px;
+}
+
+.cancel-btn:hover {
+  background: #cbd5e0;
+}
+
+.cancel-btn:active {
+  transform: translateY(1px);
+}
+
+@media (max-width: 480px) {
+  .edit-task-card {
+    padding: 30px 20px;
+  }
+
+  .header h1 {
+    font-size: 1.75rem;
+  }
+
+  .container {
+    max-width: 400px;
+  }
+}

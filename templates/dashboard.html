@@ -58,7 +58,8 @@
                         <div class="task-item">
                             <div class="task-info">
                                 <span class="task-title">{{ task.title }}</span>
-                                <span class="task-date">Due: {{ task.due_date.strftime("%d %b %Y")}}</span>
+                                <span class="task-date">Due: {% if task.due_date != None %} {{ task.due_date.strftime("%d %b %Y")}} 
+                                    {% else %} No Due Date {% endif %}</span>
                             </div>
                             <div class="task-right">
                                 <span class="task-priority {% if task.priority == 0 %}low{% elif task.priority == 1 %}medium{% else %}high{% endif %} ">

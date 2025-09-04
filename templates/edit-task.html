@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Task - TaskFlow</title>
+    <link rel="stylesheet" href="/static/edit-task.css">
+</head>
+<body>
+    <div class="container">
+        <div class="edit-task-card">
+            <div class="header">
+                <!-- Updated header text and description for editing -->
+                <h1>Edit Task</h1>
+                <p>Update your task details</p>
+            </div>
+            
+            <form class="edit-task-form">
+                <div class="form-group">
+                    <label for="title">Task Title</label>
+                    <!-- Pre-populated value for editing -->
+                    <input type="text" id="title" name="title" value="Complete project proposal" placeholder="Enter task title" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <!-- Pre-populated description for editing -->
+                    <textarea id="description" name="description" placeholder="Enter task description" rows="4">Finalize the project proposal document and prepare for client presentation. Include budget estimates and timeline.</textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="dueDate">Due Date</label>
+                    <!-- Pre-populated due date for editing -->
+                    <input type="date" id="dueDate" name="dueDate" value="2024-01-15" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="priority">Priority</label>
+                    <select id="priority" name="priority">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <!-- Pre-selected high priority for editing -->
+                        <option value="high" selected>High</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <!-- Added status field for editing existing tasks -->
+                    <select id="status" name="status">
+                        <option value="pending" selected>Pending</option>
+                        <option value="in-progress">In Progress</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
+                
+                <!-- Updated button text and added cancel button -->
+                <button type="submit" class="update-task-btn">Update Task</button>
+                <button type="button" class="cancel-btn" onclick="window.location.href='tasks.html'">Cancel</button>
+                
+                <div class="form-footer">
+                    <!-- Updated back link to go to tasks page -->
+                    <p><a href="tasks.html" class="back-link">← Back to Tasks</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -192,3 +192,26 @@ def delete_task(task_id, user_id):
     finally:
         cur.close()
         conn.close()
+
+def edit_task(task_id, user_id, title, description=None, due_date = None, priority=0):
+    conn = get_db_connection()
+    if not conn:
+        return False
+    cur = conn.cursor()
+    try:
+        if due_date:
+            due_date = due_date if isinstance(due_date, datetime) else datetime.strptime(due_date, "%Y-%m-%d")
+        cur.execute("""
+            UPDATE user_tasks
+                    SET title = %s, description = %s, due_date = %s, priority = %s
+                    WHERE id = %s AND user_id = %s
+                    """, (title, description, due_date, priority, task_id, user_id))
+        conn.commit()
+        return True
+    except Exception as e:
+        conn.rollback()
+        print(e)
+        return False
+    finally:
+        cur.close()
+        conn.close()
