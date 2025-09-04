@@ -7,5 +7,8 @@ def get_tasks_stats(tasks):
     
 def calculate_progress(active_tasks, completed_tasks):
     total = active_tasks + completed_tasks
-    progress = (completed_tasks//total) * 100
+    if total != 0:
+        progress = (completed_tasks//total) * 100
+    else:
+        progress = 0
     return progress

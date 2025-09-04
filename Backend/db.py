@@ -21,7 +21,6 @@ def get_db_connection():
             port=DB_PORT,
             cursor_factory=RealDictCursor
         )
-        print("Database connection established")
         return conn
     except Exception as e:
         print(f"Error connecting to the database: {e}")

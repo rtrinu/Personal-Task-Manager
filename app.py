@@ -54,8 +54,10 @@ def dashboard():
 
 @app.route('/create-task', methods=['GET','POST'])
 def create_task():
+    user_id = session['user_id']
     if 'user_id' not in session:
         return redirect(url_for('auth_routes.login_form'))
+    fullname = db_actions.get_fullname_by_id(user_id)
     if request.method == 'POST':
         title= request.form.get('title')
         description = request.form.get('description')
@@ -74,7 +76,7 @@ def create_task():
             return redirect(url_for('dashboard'))
         else:
             print("TASK CREATION FAILED")
-    return render_template('create-task.html')
+    return render_template('create-task.html', fullname= fullname)
 
 from datetime import datetime
 from flask import session

@@ -58,17 +58,21 @@
                         <div class="task-item">
                             <div class="task-info">
                                 <span class="task-title">{{ task.title }}</span>
-                                <span class="task-date">Due: {{ task.due_date }}</span>
+                                <span class="task-date">Due: {{ task.due_date.strftime("%d %b %Y")}}</span>
                             </div>
                             <div class="task-right">
-                                <span class="task-priority">
+                                <span class="task-priority {% if task.priority == 0 %}low{% elif task.priority == 1 %}medium{% else %}high{% endif %} ">
                                     {% if task.priority == 0 %}Low{% elif task.priority == 1 %}Medium{% else %}High{% endif %}
                                 </span>
                                 <span class="task-status {{ task.status }}">{{ task.status|capitalize }}</span>
                             </div>
                         </div>
+                        
                         {% else %}
-                        <p>No tasks found.</p>
+                        <h3>No tasks found.</h3>
+                        <a href="{{url_for('create_task')}}" class="action-btn primary">
+                            Create Task
+                        </a>
                         {% endfor %}
                     </div>
                     <a href="{{url_for('all_tasks')}}" class="view-all-btn">View All Tasks</a>
