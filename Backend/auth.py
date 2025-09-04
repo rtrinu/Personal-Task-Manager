@@ -11,7 +11,8 @@ def register_form():
 def register():
     email = request.form.get('email')
     password = request.form.get('password')
-    user = register_user(email, password)
+    fullname = request.form.get('fullname')
+    user = register_user(email, password, fullname)
     if user:
         flash("Registration successful! Please log in.", "success")
         return redirect(url_for('auth_routes.login_form'))

@@ -14,7 +14,7 @@
                 <p>Organize your work, achieve your goals</p>
             </div>
             
-            <form class="login-form">
+            <form action ="{{ url_for('auth_routes.login') }}" method='POST' class="login-form">
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" required>

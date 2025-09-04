@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow - Register</title>
+    <link rel="stylesheet" href="/static/register.css">
+</head>
+<body>
+    <div class="container">
+        <div class="register-card">
+            <div class="header">
+                <h1>TaskFlow</h1>
+                <p>Join us to organize your work and achieve your goals</p>
+            </div>
+            
+            <form  action="{{ url_for('auth_routes.register') }}" method="POST" class="register-form">
+                <div class="form-group">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" id="fullname" name="fullname" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirm-password" required>
+                </div>
+                
+                <button type="submit" class="register-btn">Create Account</button>
+                
+                <div class="form-footer">
+                    <p>Already have an account? <a href="#" class="login-link">Sign in here</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
