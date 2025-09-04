@@ -32,7 +32,12 @@ def register():
 def dashboard():
     if 'user_id' not in session:
         return redirect(url_for('auth_routes.login_form'))
-    return render_template('dashboard.html')
+    
+    user_id = session['user_id']
+    fullname = db_actions.get_fullname_by_id(user_id)
+    email = db_actions.get_email_by_id(user_id)
+    joined_at = db_actions.get_joined_at_date_by_id(user_id)
+    return render_template('dashboard.html', fullname=fullname, email=email, joined_at=joined_at)
 
 
 if __name__ == '__main__':

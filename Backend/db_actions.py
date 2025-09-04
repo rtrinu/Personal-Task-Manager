@@ -1,6 +1,7 @@
 from .db import get_db_connection
 from werkzeug.security import generate_password_hash, check_password_hash
 import psycopg2.extras
+import datetime
 
 def init_user_table():
     conn = get_db_connection()
@@ -12,7 +13,8 @@ def init_user_table():
             id SERIAL PRIMARY KEY,
             email VARCHAR(255) UNIQUE NOT NULL,
             password_hash VARCHAR(255) NOT NULL,
-            fullname VARCHAR(255) NOT NULL
+            fullname VARCHAR(255) NOT NULL,
+            joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP    
         );
     """)
     conn.commit()
@@ -59,3 +61,48 @@ def verify_user(email, password):
         cur.close()
         conn.close()
     return None
+
+def get_fullname_by_id(user_id):
+    conn = get_db_connection()
+    if not conn:
+        return None
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    try:
+        cur.execute("SELECT fullname FROM users WHERE id = %s;", (user_id,))
+        user = cur.fetchone()
+        if user:
+            return user['fullname']
+    finally:
+        cur.close()
+        conn.close()
+    return None
+
+def get_email_by_id(user_id):
+    conn = get_db_connection()
+    if not conn:
+        return None
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    try:
+        cur.execute("SELECT email FROM users WHERE id = %s;",(user_id,))
+        user = cur.fetchone()
+        if user:
+            return user['email']
+    finally:
+        cur.close()
+        conn.close()
+
+def get_joined_at_date_by_id(user_id):
+    conn = get_db_connection()
+    if not conn: 
+        return None
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    try:
+        cur.execute("SELECT joined_at FROM users WHERE id = %s;",(user_id,))
+        user = cur.fetchone()
+        if user:
+            date = user['joined_at']
+            formatted = date.strftime("%d %b %Y")
+            return formatted
+    finally:
+        cur.close()
+        conn.close()
