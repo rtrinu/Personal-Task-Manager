@@ -133,24 +133,42 @@ def get_joined_at_date_by_id(user_id):
         conn.close()
     return None
 
-def create_task(user_id, title, description=None, due_date=None):
+def create_task(user_id, title, description=None, due_date=None, priority=0):
     conn = get_db_connection()
     if not conn:
         return None
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     try:
         cur.execute(
-            "INSERT INTO user_tasks (user_id, title, description, due_date) "
-            "VALUES (%s, %s, %s, %s) RETURNING id, title, description, due_date, created_at;",
-            (user_id, title, description, due_date)
+            "INSERT INTO user_tasks (user_id, title, description, due_date, priority) "
+            "VALUES (%s, %s, %s, %s, %s) RETURNING id, title, description, due_date, created_at, priority;",
+            (user_id, title, description, due_date, priority)
         )
+
         task = cur.fetchone()
         conn.commit()
         if task:
             return dict(task)
     except Exception as e:
+        print(e)
         conn.rollback()
     finally:
         cur.close()
         conn.close()
     return None
+
+def get_tasks_by_user(user_id):
+    conn = get_db_connection()
+    if not conn:
+        return []
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    try:
+        cur.execute(
+            "SELECT id, title, description, due_date, created_at, priority FROM user_tasks WHERE user_id = %s ORDER BY created_at DESC;",
+            (user_id,)
+        )
+        tasks = cur.fetchall()
+        return [dict(task) for task in tasks]
+    finally:
+        cur.close()
+        conn.close()

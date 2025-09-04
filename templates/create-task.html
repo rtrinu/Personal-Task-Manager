@@ -14,7 +14,7 @@
                 <p>Add a new task to your workflow</p>
             </div>
             
-            <form class="create-task-form">
+            <form action="{{ url_for('create_task') }}" method="POST" class="create-task-form">
                 <div class="form-group">
                     <label for="title">Task Title</label>
                     <input type="text" id="title" name="title" placeholder="Enter task title" required>
@@ -27,22 +27,22 @@
                 
                 <div class="form-group">
                     <label for="dueDate">Due Date</label>
-                    <input type="date" id="dueDate" name="dueDate" required>
+                    <input type="date" id="dueDate" name="dueDate">
                 </div>
                 
                 <div class="form-group">
                     <label for="priority">Priority</label>
                     <select id="priority" name="priority">
-                        <option value="low">Low</option>
-                        <option value="medium" selected>Medium</option>
-                        <option value="high">High</option>
+                        <option value="0">Low</option>
+                        <option value="1" selected>Medium</option>
+                        <option value="2">High</option>
                     </select>
                 </div>
                 
                 <button type="submit" class="create-task-btn">Create Task</button>
                 
                 <div class="form-footer">
-                    <p><a href="dashboard.html" class="back-link">← Back to Dashboard</a></p>
+                    <p><a href="/dashboard" class="back-link">← Back to Dashboard</a></p>
                 </div>
             </form>
         </div>
