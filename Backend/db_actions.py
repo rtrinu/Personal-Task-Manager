@@ -173,3 +173,22 @@ def get_tasks_by_user(user_id):
     finally:
         cur.close()
         conn.close()
+
+def delete_task(task_id, user_id):
+    conn = get_db_connection()
+    if not conn:
+        return False
+    cur = conn.cursor()
+    try:
+        cur.execute(
+            "DELETE FROM user_tasks WHERE id = %s AND user_id = %s;",
+            (task_id, user_id)
+        )
+        conn.commit()
+        return cur.rowcount > 0
+    except Exception as e:
+        conn.rollback()
+        return False
+    finally:
+        cur.close()
+        conn.close()

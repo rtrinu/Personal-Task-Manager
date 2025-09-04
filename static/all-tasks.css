@@ -241,6 +241,11 @@ body {
   color: #38a169;
 }
 
+.task-status.no-due-date {
+  background: #e2e8f0;
+  color: #4a5568;
+}
+
 /* Priority badges */
 .task-priority.high {
   background: #fed7d7;

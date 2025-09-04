@@ -59,7 +59,13 @@
                     <div class="task-header">
                         <h3 class="task-title">{{task.title}}</h3>
                         <div class="task-badges">
-                            <span class="task-status pending">{{task.completed}}</span>
+                            <span class="task-status {% if task.completed == True %}completed {% elif task.due_date == None %} no-due-date
+                            {% elif task.overdue == True %} pending {% else %}in-progress {% endif %}">
+                            {% if task.completed == True %}Completed
+                                {% elif task.overdue == True %}Overdue
+                                {% elif task.due_date == None %}No Due Date
+                                {% else %} In Progress
+                                {% endif %}</span>
                             <span class="task-priority {% if task.priority == 0 %}low{% elif task.priority == 1 %}medium{% else %}high{% endif %}">
                                 {% if task.priority == 0 %}Low{% elif task.priority == 1 %}Medium{% else %}High{% endif %}
                             </span>
@@ -68,12 +74,15 @@
                     <p class="task-description">{{task.description}}</p>
                     <div class="task-footer">
                         <div class="task-meta">
-                            <span class="task-date">📅 Due: {{task.due_date}}</span>
-                            <span class="task-created">Created: {{task.created_at}}</span>
+                            <span class="task-date">📅 Due: {%if task.due_date != None %}{{ task.due_date.strftime("%d %b %Y") }}{%else%}No Due Date {% endif %}</span>
+                            <span class="task-created">Created: {{task.created_at.strftime("%d %b %Y")}}</span>
                         </div>
                         <div class="task-actions">
                             <button class="action-btn edit">Edit</button>
-                            <button class="action-btn delete">Delete</button>
+                            <form action="{{ url_for('delete_task', task_id=task.id) }}" method="POST" style="display:inline;">
+                                <button type="submit" class="action-btn delete">Delete</button>
+                            </form>
+
                             <button class="action-btn complete">Mark Complete</button>
                         </div>
                     </div>
@@ -103,75 +112,6 @@
                     </div>
                 </div>
 
-                <!-- Task Item 3 -->
-                <div class="task-card">
-                    <div class="task-header">
-                        <h3 class="task-title">Update website content</h3>
-                        <div class="task-badges">
-                            <span class="task-status completed">Completed</span>
-                            <span class="task-priority low">Low</span>
-                        </div>
-                    </div>
-                    <p class="task-description">Update the company website with new product information and testimonials.</p>
-                    <div class="task-footer">
-                        <div class="task-meta">
-                            <span class="task-date">📅 Due: Dec 12, 2024</span>
-                            <span class="task-created">Created: Dec 5, 2024</span>
-                        </div>
-                        <div class="task-actions">
-                            <button class="action-btn edit">Edit</button>
-                            <button class="action-btn delete">Delete</button>
-                            <button class="action-btn complete" disabled>Completed</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Task Item 4 -->
-                <div class="task-card">
-                    <div class="task-header">
-                        <h3 class="task-title">Prepare monthly report</h3>
-                        <div class="task-badges">
-                            <span class="task-status pending">Pending</span>
-                            <span class="task-priority medium">Medium</span>
-                        </div>
-                    </div>
-                    <p class="task-description">Compile and analyze monthly sales data and create comprehensive report for management.</p>
-                    <div class="task-footer">
-                        <div class="task-meta">
-                            <span class="task-date">📅 Due: Dec 25, 2024</span>
-                            <span class="task-created">Created: Dec 11, 2024</span>
-                        </div>
-                        <div class="task-actions">
-                            <button class="action-btn edit">Edit</button>
-                            <button class="action-btn delete">Delete</button>
-                            <button class="action-btn complete">Mark Complete</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Task Item 5 -->
-                <div class="task-card">
-                    <div class="task-header">
-                        <h3 class="task-title">Client meeting preparation</h3>
-                        <div class="task-badges">
-                            <span class="task-status in-progress">In Progress</span>
-                            <span class="task-priority high">High</span>
-                        </div>
-                    </div>
-                    <p class="task-description">Prepare presentation materials and agenda for upcoming client meeting next week.</p>
-                    <div class="task-footer">
-                        <div class="task-meta">
-                            <span class="task-date">📅 Due: Dec 18, 2024</span>
-                            <span class="task-created">Created: Dec 9, 2024</span>
-                        </div>
-                        <div class="task-actions">
-                            <button class="action-btn edit">Edit</button>
-                            <button class="action-btn delete">Delete</button>
-                            <button class="action-btn complete">Mark Complete</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <!-- Empty State (hidden by default) -->
             <div class="empty-state" style="display: none;">
