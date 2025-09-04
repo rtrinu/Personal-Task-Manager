@@ -32,6 +32,6 @@ def login():
         session['user_id'] = user['id']
         session['email'] = user['email']
         flash("Login successful!", "success")
-        return redirect(url_for('home'))  # redirect to home or dashboard
+        return redirect(url_for('dashboard'))  
     flash("Invalid email or password.", "danger")
     return redirect(url_for('auth_routes.login_form'))

@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, session, redirect, url_for
 from Backend.db import get_db_connection
 from Backend.auth import auth_routes
 import Backend.db_actions as db_actions
@@ -27,6 +27,12 @@ def login():
 @app.route('/register')
 def register():
     return render_template('register.html')
+
+@app.route('/dashboard')
+def dashboard():
+    if 'user_id' not in session:
+        return redirect(url_for('auth_routes.login_form'))
+    return render_template('dashboard.html')
 
 
 if __name__ == '__main__':

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow - Dashboard</title>
+    <link rel="stylesheet" href="/static/dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="header-content">
+                <h1>TaskFlow</h1>
+                <div class="user-menu">
+                    <span class="user-name">Welcome, John Doe</span>
+                    <button class="logout-btn">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <div class="welcome-section">
+                <h2>Welcome to your Dashboard</h2>
+                <p>Organize your work and achieve your goals efficiently</p>
+            </div>
+
+            <div class="dashboard-grid">
+                <!-- Quick Stats -->
+                <div class="card stats-card">
+                    <h3>Quick Stats</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-number">12</span>
+                            <span class="stat-label">Active Tasks</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">8</span>
+                            <span class="stat-label">Completed</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">3</span>
+                            <span class="stat-label">Projects</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">85%</span>
+                            <span class="stat-label">Progress</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Tasks -->
+                <div class="card tasks-card">
+                    <h3>Recent Tasks</h3>
+                    <div class="task-list">
+                        <div class="task-item">
+                            <div class="task-info">
+                                <span class="task-title">Complete project proposal</span>
+                                <span class="task-date">Due: Today</span>
+                            </div>
+                            <span class="task-status pending">Pending</span>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-info">
+                                <span class="task-title">Review team feedback</span>
+                                <span class="task-date">Due: Tomorrow</span>
+                            </div>
+                            <span class="task-status in-progress">In Progress</span>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-info">
+                                <span class="task-title">Update documentation</span>
+                                <span class="task-date">Due: Friday</span>
+                            </div>
+                            <span class="task-status completed">Completed</span>
+                        </div>
+                    </div>
+                    <button class="view-all-btn">View All Tasks</button>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="card actions-card">
+                    <h3>Quick Actions</h3>
+                    <div class="action-buttons">
+                        <button class="action-btn primary">
+                            <span class="btn-icon">+</span>
+                            New Task
+                        </button>
+                        <button class="action-btn secondary">
+                            <span class="btn-icon">📁</span>
+                            New Project
+                        </button>
+                        <button class="action-btn secondary">
+                            <span class="btn-icon">👥</span>
+                            Invite Team
+                        </button>
+                        <button class="action-btn secondary">
+                            <span class="btn-icon">📊</span>
+                            View Reports
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Profile Card -->
+                <div class="card profile-card">
+                    <h3>Profile</h3>
+                    <div class="profile-info">
+                        <div class="profile-avatar">JD</div>
+                        <div class="profile-details">
+                            <h4>John Doe</h4>
+                            <p>john.doe@example.com</p>
+                            <p class="member-since">Member since: Jan 2024</p>
+                        </div>
+                    </div>
+                    <button class="edit-profile-btn">Edit Profile</button>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
