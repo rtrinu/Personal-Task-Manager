@@ -61,8 +61,7 @@
                                 <span class="task-date">Due: {{ task.due_date }}</span>
                             </div>
                             <div class="task-right">
-                                <span class="task-priority
-                                    {% if task.priority == 0 %}low{% elif task.priority == 1 %}medium{% else %}high{% endif %}">
+                                <span class="task-priority">
                                     {% if task.priority == 0 %}Low{% elif task.priority == 1 %}Medium{% else %}High{% endif %}
                                 </span>
                                 <span class="task-status {{ task.status }}">{{ task.status|capitalize }}</span>

@@ -84,7 +84,9 @@ def all_tasks():
     if 'user_id' not in session:
         return redirect(url_for('auth_routes.login_form'))
     tasks = display_tasks()
-    return render_template('all-tasks.html', tasks=tasks)
+    user_id = session['user_id']
+    fullname = db_actions.get_fullname_by_id(user_id)
+    return render_template('all-tasks.html', tasks=tasks, fullname=fullname)
 
 
 @app.route('/logout')
