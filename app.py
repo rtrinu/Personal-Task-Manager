@@ -9,6 +9,7 @@ def create_app():
     app.secret_key = "your_secret_key"
 
     db_actions.init_user_table()
+    db_actions.init_task_table()
 
     app.register_blueprint(auth_routes)
     return app
@@ -38,6 +39,12 @@ def dashboard():
     email = db_actions.get_email_by_id(user_id)
     joined_at = db_actions.get_joined_at_date_by_id(user_id)
     return render_template('dashboard.html', fullname=fullname, email=email, joined_at=joined_at)
+
+@app.route('/create-task')
+def create_task():
+    if 'user_id' not in session:
+        return redirect(url_for('auth_routes.login_form'))
+    return render_template('create-task.html')
 
 
 if __name__ == '__main__':

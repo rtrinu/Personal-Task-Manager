@@ -17,6 +17,30 @@ def init_user_table():
             joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP    
         );
     """)
+    print("User table ensured.")
+
+    conn.commit()
+    cur.close()
+    conn.close()
+
+def init_task_table():
+    conn = get_db_connection()
+    if not conn:
+        return
+    cur = conn.cursor()
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS user_tasks (
+            id SERIAL PRIMARY KEY,
+            user_id INT NOT NULL,
+            title VARCHAR(255) NOT NULL,
+            description TEXT,
+            due_date TIMESTAMP,
+            PRIORITY INT DEFAULT 0,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+        );
+    """)
+    print("Tasks table ensured.")
     conn.commit()
     cur.close()
     conn.close()
@@ -90,6 +114,7 @@ def get_email_by_id(user_id):
     finally:
         cur.close()
         conn.close()
+    return None
 
 def get_joined_at_date_by_id(user_id):
     conn = get_db_connection()
@@ -106,3 +131,26 @@ def get_joined_at_date_by_id(user_id):
     finally:
         cur.close()
         conn.close()
+    return None
+
+def create_task(user_id, title, description=None, due_date=None):
+    conn = get_db_connection()
+    if not conn:
+        return None
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    try:
+        cur.execute(
+            "INSERT INTO user_tasks (user_id, title, description, due_date) "
+            "VALUES (%s, %s, %s, %s) RETURNING id, title, description, due_date, created_at;",
+            (user_id, title, description, due_date)
+        )
+        task = cur.fetchone()
+        conn.commit()
+        if task:
+            return dict(task)
+    except Exception as e:
+        conn.rollback()
+    finally:
+        cur.close()
+        conn.close()
+    return None
